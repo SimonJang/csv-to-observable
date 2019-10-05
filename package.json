@@ -2,6 +2,7 @@
 	"name": "csv-to-observable",
 	"version": "0.1.0",
 	"description": "Create an observable stream from a csv stream",
+	"repository": "https://github.com/SimonJang/csv-to-observable",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"scripts": {
@@ -16,7 +17,13 @@
 	"engines": {
 		"node": ">=8"
 	},
-	"keywords": [],
+	"keywords": [
+		"streams",
+		"csv",
+		"observables",
+		"rxjs",
+		"io"
+	],
 	"files": [
 		"lib"
 	],
