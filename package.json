@@ -1,0 +1,63 @@
+{
+	"name": "csv-to-observable",
+	"version": "0.0.0",
+	"description": "Create an observable stream from a csv stream",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"scripts": {
+		"lint": "tslint -p . --format stylish",
+		"format": "prettier --write \"source/**/*.ts\" \"lib/**/*.js\"",
+		"build": "npm run clean && tsc -p tsconfig.json",
+		"test": "nyc ava",
+		"clean": "del-cli lib",
+		"prepare": "npm run test && npm run build",
+		"deploy": "npm run prepare && npx np"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"keywords": [],
+	"files": [
+		"lib"
+	],
+	"author": {
+		"name": "Simon Jang",
+		"email": "simon.jang.contact@gmail.com"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@istanbuljs/nyc-config-typescript": "^0.1.3",
+		"@types/node": "^12.7.5",
+		"ava": "^2.4.0",
+		"del-cli": "^3.0.0",
+		"nyc": "^14.1.1",
+		"prettier": "^1.18.2",
+		"rxjs": "^6.5.3",
+		"ts-node": "^8.4.1",
+		"tslint": "^5.20.0",
+		"tslint-config-prettier": "^1.18.0",
+		"tslint-xo": "^0.16.0",
+		"type-fest": "^0.8.0",
+		"typescript": "^3.6.3"
+	},
+	"dependencies": {
+		"csv-parser": "^2.3.0",
+		"strip-bom-stream": "^4.0.0"
+	},
+	"peerDependencies": {
+		"rxjs": "^6.5.3"
+	},
+	"nyc": {
+		"extends": "@istanbuljs/nyc-config-typescript"
+	},
+	"ava": {
+		"babel": false,
+		"compileEnhancements": false,
+		"extensions": [
+			"ts"
+		],
+		"require": [
+			"ts-node/register"
+		]
+	}
+}
