@@ -22,6 +22,7 @@ import {tap} from 'rxjs/operators'
 
 const stream = fs.createReadStream(join(__dirname, 'test.csv'));
 
+// Seperator defaults to `,` if not provided
 csvToObservable(csvStream, { separator: ';' })
 	.pipe(
 		tap(item => console.log(item)) // JSON object
