@@ -9,10 +9,10 @@ import { JsonObject } from 'type-fest';
  *
  * @param stream - Stream to create the events from.
  */
-function csvStreamToObservable(stream: ReadStream): Observable<JsonObject> {
+const csvStreamToObservable = <T extends JsonObject>(stream: ReadStream): Observable<T> => {
 	return new Observable((observer): (() => void) => {
 		stream
-			.on('data', (chunk: JsonObject) => {
+			.on('data', (chunk: T) => {
 				observer.next(chunk);
 			})
 			.on('error', (err: Error) => {
@@ -22,6 +22,7 @@ function csvStreamToObservable(stream: ReadStream): Observable<JsonObject> {
 				observer.complete();
 			});
 
+		// tslint:disable-next-line:typedef
 		return () => {
 			stream.destroy();
 		};
@@ -34,6 +35,6 @@ function csvStreamToObservable(stream: ReadStream): Observable<JsonObject> {
  * @param stream - CSV read stream.
  * @param options - Configuration options for the stream.
  */
-export function csvToObservable(stream: ReadStream, opts: csvParser.Options = {}): Observable<JsonObject> {
-	return csvStreamToObservable(stream.pipe(stripBOM()).pipe(csvParser({ ...opts }) as any));
+export const csvToObservable = <T extends JsonObject = JsonObject>(stream: ReadStream, opts: csvParser.Options = {}): Observable<T> => {
+	return csvStreamToObservable<T>(stream.pipe(stripBOM()).pipe(csvParser({ ...opts }) as any));
 }
