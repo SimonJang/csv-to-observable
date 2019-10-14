@@ -34,6 +34,6 @@ function csvStreamToObservable(stream: ReadStream): Observable<JsonObject> {
  * @param stream - CSV read stream.
  * @param options - Configuration options for the stream.
  */
-export function csvToObservable(stream: ReadStream, opts: csvParser.Options): Observable<JsonObject> {
+export function csvToObservable(stream: ReadStream, opts: csvParser.Options = {}): Observable<JsonObject> {
 	return csvStreamToObservable(stream.pipe(stripBOM()).pipe(csvParser({ ...opts }) as any));
 }
