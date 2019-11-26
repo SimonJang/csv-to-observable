@@ -38,5 +38,3 @@ const csvStreamToObservable = <T extends JsonObject>(stream: ReadStream): Observ
 export const csvToObservable = <T extends JsonObject = JsonObject>(stream: ReadStream, opts: csvParser.Options = {}): Observable<T> => {
 	return csvStreamToObservable<T>(stream.pipe(stripBOM()).pipe(csvParser({ ...opts }) as any));
 }
-
-export default csvToObservable;
