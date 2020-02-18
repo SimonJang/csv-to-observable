@@ -2,14 +2,12 @@ import { ReadStream } from 'fs';
 import { Observable } from 'rxjs';
 import * as stripBOM from 'strip-bom-stream';
 import * as csvParser from 'csv-parser';
-import { JsonObject } from 'type-fest';
-
 /**
  * Create an observable stream from the stream events.
  *
  * @param stream - Stream to create the events from.
  */
-const csvStreamToObservable = <T extends JsonObject>(stream: ReadStream): Observable<T> => {
+const csvStreamToObservable = <T = any>(stream: ReadStream): Observable<T> => {
 	return new Observable((observer): (() => void) => {
 		stream
 			.on('data', (chunk: T) => {
@@ -35,6 +33,6 @@ const csvStreamToObservable = <T extends JsonObject>(stream: ReadStream): Observ
  * @param stream - CSV read stream.
  * @param options - Configuration options for the stream.
  */
-export const csvToObservable = <T extends JsonObject = JsonObject>(stream: ReadStream, opts: csvParser.Options = {}): Observable<T> => {
+export const csvToObservable = <T = any>(stream: ReadStream, opts: csvParser.Options = {}): Observable<T> => {
 	return csvStreamToObservable<T>(stream.pipe(stripBOM()).pipe(csvParser({ ...opts }) as any));
 }
